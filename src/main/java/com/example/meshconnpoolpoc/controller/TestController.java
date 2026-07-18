@@ -11,7 +11,7 @@ public class TestController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${ENVOY_URL}")
+    @Value("${envoy.url}")
     private String envoyUrl;
 
     @GetMapping("/call")
