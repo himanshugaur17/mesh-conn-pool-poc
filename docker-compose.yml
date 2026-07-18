@@ -1,0 +1,45 @@
+services:
+  mesh-conn-pool-poc:
+    build: .
+    container_name: mesh-conn-pool-poc
+    depends_on:
+      - envoy-proxy
+    environment:
+      ENVOY_URL: http://envoy-proxy:10000
+    ports:
+      - "8080:8080"
+    networks:
+      - mesh-network
+
+  envoy-proxy:
+    image: envoyproxy/envoy:v1.28.0
+    container_name: envoy-proxy
+    command:
+      - envoy
+      - -c
+      - /etc/envoy/envoy.yaml
+      - --log-level
+      - info
+    depends_on:
+      - mock-java-service
+    volumes:
+      - ./envoy.yaml:/etc/envoy/envoy.yaml:ro
+    ports:
+      - "10000:10000"
+      - "19000:19000"
+    networks:
+      - mesh-network
+
+  mock-java-service:
+    image: wiremock/wiremock:3.9.1
+    container_name: mock-java-service
+    volumes:
+      - ./wiremock:/home/wiremock:ro
+    ports:
+      - "8089:8080"
+    networks:
+      - mesh-network
+
+networks:
+  mesh-network:
+    driver: bridge

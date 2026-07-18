@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/mock-endpoint"
+  },
+  "response": {
+    "status": 200,
+    "fixedDelayMilliseconds": 2000,
+    "headers": {
+      "Content-Type": "text/plain"
+    },
+    "body": "wiremock-ok"
+  }
+}
