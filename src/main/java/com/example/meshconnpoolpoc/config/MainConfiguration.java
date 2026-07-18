@@ -19,7 +19,8 @@ public class MainConfiguration {
         CloseableHttpClient httpClient = HttpClients.custom().setConnectionManager(connectionManager).build();
         HttpComponentsClientHttpRequestFactory httpComponentsClientHttpRequestFactory = new HttpComponentsClientHttpRequestFactory(
                 httpClient);
-        httpComponentsClientHttpRequestFactory.setConnectionRequestTimeout(5000); // TIME TAKEN FOR TCP CONNECTION TO ESTABLISH
+        httpComponentsClientHttpRequestFactory.setConnectionRequestTimeout(5000); // TIME TAKEN FOR TCP CONNECTION TO
+                                                                                  // ESTABLISH
         httpComponentsClientHttpRequestFactory.setReadTimeout(10000); // MAX GAP BETWEEN 2 DATA PACKETS
         return new RestTemplate(httpComponentsClientHttpRequestFactory);
     }
